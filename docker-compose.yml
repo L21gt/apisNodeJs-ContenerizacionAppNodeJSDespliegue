@@ -1,0 +1,58 @@
+# Define los servicios (contenedores) que componen la aplicación
+services:
+
+  # Servicio de la Aplicación Node.js (API)
+  api:
+    # Instruye a Compose para construir la imagen usando el Dockerfile
+    # ubicado en el directorio actual (.).
+    build: .
+    container_name: task_api_app_tarea4
+    restart: always
+    ports:
+      # Mapea el puerto 4000 del host al puerto 4000 del contenedor (donde corre la app).
+      - "4000:4000"
+    depends_on:
+      # Define una dependencia. El servicio 'api' no se iniciará
+      # hasta que el servicio 'postgres-db' esté listo.
+      - postgres-db
+    environment:
+      # Inyecta variables de entorno en el contenedor de la API.
+      # La aplicación Node.js (server.js) debe leer estas variables.
+      PORT: 4000
+      
+      # --- Configuración de la Base de Datos ---
+      # Esta es la parte clave de la conexión:
+      # Docker Compose crea una red interna donde el host de la base de datos
+      # es accesible usando el *nombre del servicio* ('postgres-db').
+      POSTGRES_HOST: postgres-db
+      
+      # Lee las siguientes variables del archivo .env en la raíz del proyecto
+      # y las pasa al contenedor.
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
+  # Servicio de la Base de Datos PostgreSQL
+  postgres-db:
+    # Utiliza la imagen oficial de Postgres 13 (variante ligera Alpine).
+    image: postgres:13-alpine
+    container_name: task_api_db_tarea4
+    restart: always
+    environment:
+      # Configura el usuario, contraseña y base de datos inicial
+      # leyendo las variables del archivo .env.
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      # Mapea el puerto 5432 del host al 5432 del contenedor
+      # para permitir conexiones directas a la BD (ej. DBeaver).
+      - "5433:5432"
+    volumes:
+      # Define un volumen nombrado para persistir los datos de la base de datos
+      # incluso si el contenedor es eliminado y recreado.
+      - pgdata:/var/lib/postgresql/data
+
+# Define los volúmenes nombrados utilizados por los servicios
+volumes:
+  pgdata:

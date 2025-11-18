@@ -1,0 +1,23 @@
+# Dependencias
+/node_modules
+
+# Variables de entorno
+.env
+.env.test
+
+# Archivos de logs
+npm-debug.log
+*.log
+
+# ## Reportes de Pruebas ##
+# Ignora la carpeta de reportes de cobertura generada por Jest.
+/coverage
+
+# ## Archivos del Sistema Operativo ##
+# Ignora archivos de metadatos de macOS y Windows.
+.DS_Store
+Thumbs.db
+
+# ## Archivos del Editor de Código ##
+# Ignora la configuración local de VS Code.
+.vscode/

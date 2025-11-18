@@ -1,0 +1,22 @@
+# Ignorar dependencias locales.
+# Éstas se instalan limpiamente dentro del contenedor usando package.json.
+node_modules
+
+# Ignorar archivos de log de npm
+npm-debug.log
+npm-error.log
+
+# Ignorar archivos de entorno.
+# Las variables de entorno deben ser inyectadas en el entorno de despliegue,
+# no "horneadas" (baked in) en la imagen por seguridad.
+.env
+.env.test
+.env.example
+
+# Ignorar archivos de configuración de herramientas de desarrollo
+nodemon.json
+.vscode/
+
+# Ignorar archivos específicos del sistema operativo
+.DS_Store
+Thumbs.db

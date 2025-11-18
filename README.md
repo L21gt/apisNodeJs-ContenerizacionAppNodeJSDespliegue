@@ -89,3 +89,11 @@ Este proyecto está configurado para ejecutarse en un entorno contenedorizado ut
     ```bash
     docker compose down
     ```
+
+---
+
+### 📄 CAPTURAS: Pruebas de Ejecución y Despliegue
+
+Las capturas de pantalla de la construcción local, las pruebas en Postman y el despliegue en Play With Docker se encuentran en el siguiente documento:
+
+**[Ver PDF de Pruebas (Clic aquí)](./Pruebas_Tarea_4.pdf)**
